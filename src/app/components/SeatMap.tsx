@@ -17,7 +17,7 @@ export default function SeatMap({ selectedSeats, onSeatClick }: SeatMapProps) {
   // Actually, I'll put it at the top of the SeatMap container so it's always visible in the center column for desktop.
 
   return (
-    <div className="flex flex-col w-full h-full relative">
+    <div className="flex flex-col w-full h-full relative min-h-0">
       
       {/* Top Header / Progress Bar (Desktop only, or shared depending on design) */}
       {/* In mobile, there's a back button and 0/2. Since MobileHeader handles mobile, we hide this on mobile */}
@@ -34,11 +34,9 @@ export default function SeatMap({ selectedSeats, onSeatClick }: SeatMapProps) {
       <SeatLegend />
 
       {/* Scrollable Map Area */}
-      <div className="flex-1 overflow-y-auto px-4 pb-12 custom-scrollbar">
-        {/* Subtle curved background to mimic airplane cabin.
-            The user said to ignore elements outside the white card, but inside the center column there's a very light curved background.
-            We'll approximate it with a div. */}
-        <div className="w-full max-w-[400px] mx-auto bg-[#F8F9FA] rounded-[60px] p-6 pt-12 relative overflow-hidden">
+      <div className="flex-1 min-h-0 overflow-y-auto px-4 pb-12 custom-scrollbar">
+        {/* Subtle curved background to mimic airplane cabin. */}
+        <div className="w-full max-w-[400px] mx-auto bg-[#F8F9FA] rounded-t-[200px] rounded-b-[60px] p-6 pt-16 relative overflow-hidden">
           <CabinSection 
             title="Business Class" 
             rows={[1, 2, 3, 4]} 
