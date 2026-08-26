@@ -18,6 +18,15 @@ export default function DesktopLeftColumn({ selectedSeats = [], totalPrice = 0 }
   const seat1 = formatSeat(selectedSeats[0]);
   const seat2 = formatSeat(selectedSeats[1]);
 
+  const getClassName = () => {
+    if (selectedSeats.length === 0) return "Business Class"; // default if none selected
+    const firstSeat = selectedSeats[0];
+    if (firstSeat.startsWith("first")) return "First Class";
+    if (firstSeat.startsWith("business")) return "Business Class";
+    return "Economy Class";
+  };
+  const displayClass = getClassName();
+
   return (
     <div className="hidden lg:flex flex-col p-8 lg:p-12 shrink-0">
       <div className="flex items-center gap-3 mb-12 text-slate-500">
@@ -35,8 +44,8 @@ export default function DesktopLeftColumn({ selectedSeats = [], totalPrice = 0 }
           <div className="w-8 h-8 rounded-lg bg-[#FDF7F5] flex items-center justify-center">
             <div className="w-2.5 h-2.5 rounded-[2px] bg-orange-400"></div>
           </div>
-          <span className="font-bold text-slate-800 text-sm leading-tight">
-            Business<br />Class
+          <span className="font-bold text-slate-800 text-sm leading-tight whitespace-pre-line">
+            {displayClass.replace(" ", "\n")}
           </span>
         </div>
         

@@ -39,8 +39,12 @@ export default function SeatSelectionCard() {
     }
   };
 
-  // Mock pricing logic
-  const totalPrice = selectedSeats.length * 150; // $150 per seat
+  // Pricing logic based on class
+  const totalPrice = selectedSeats.reduce((acc, id) => {
+    if (id.startsWith("first")) return acc + 600;
+    if (id.startsWith("business")) return acc + 300;
+    return acc + 100; // economy
+  }, 0);
 
   return (
     <div className="w-full h-screen bg-white flex flex-col lg:grid lg:grid-cols-[320px_1fr_320px]">
