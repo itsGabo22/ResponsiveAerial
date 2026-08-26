@@ -8,32 +8,34 @@ interface DesktopRightColumnProps {
 }
 
 export default function DesktopRightColumn({ selectedSeats, totalPrice }: DesktopRightColumnProps) {
+  const formatSeat = (id: string) => id.split('-').pop();
+  const formattedSeats = selectedSeats.map(formatSeat).join(", ");
   const hasSelection = selectedSeats.length > 0;
   
   return (
     <div className="hidden lg:flex flex-col p-8 lg:p-12 shrink-0">
       <h2 className="text-lg font-bold text-slate-800 mb-6">Your selection</h2>
       
-      <div className="border border-dashed border-orange-200 rounded-2xl p-6 flex flex-col items-center justify-center text-center text-sm text-slate-400 mb-auto">
+      <div className="border border-dashed border-orange-200 rounded-2xl p-6 flex flex-col items-center justify-center text-center text-[13px] text-slate-400 mb-auto min-h-[120px]">
         {hasSelection ? (
-           <div className="flex flex-col items-center gap-2">
+           <div className="flex flex-col items-center gap-1">
              <span className="text-orange-500 font-bold text-lg">
-               {selectedSeats.join(", ")}
+               {formattedSeats}
              </span>
-             <span>Selected</span>
+             <span className="font-medium">Selected</span>
            </div>
         ) : (
-          <span>Pick up to 2 seats<br/>from the cabin map</span>
+          <span className="leading-relaxed">Pick up to 2 seats<br/>from the cabin map</span>
         )}
       </div>
 
       <div className="flex flex-col gap-6 w-full">
         <div className="flex flex-col gap-3">
-          <div className="flex justify-between text-sm font-medium">
+          <div className="flex justify-between text-[13px] font-semibold">
             <span className="text-slate-400">Seats</span>
-            <span className="text-slate-800">{hasSelection ? selectedSeats.join(", ") : "None"}</span>
+            <span className="text-slate-800">{hasSelection ? formattedSeats : "None"}</span>
           </div>
-          <div className="flex justify-between text-sm font-medium">
+          <div className="flex justify-between text-[13px] font-semibold">
             <span className="text-slate-400">Taxes & fees</span>
             <span className="text-slate-800">$0</span>
           </div>
@@ -42,14 +44,14 @@ export default function DesktopRightColumn({ selectedSeats, totalPrice }: Deskto
         <div className="h-[1px] w-full bg-slate-100"></div>
 
         <div className="flex justify-between items-end mb-6">
-          <span className="text-sm font-medium text-slate-400">Total</span>
-          <span className="text-3xl font-bold text-slate-800">${totalPrice}</span>
+          <span className="text-xs font-semibold text-slate-400 pb-1">Total</span>
+          <span className="text-[32px] font-bold text-slate-800 leading-none">${totalPrice}</span>
         </div>
 
         <button 
-          className={`w-full py-4 rounded-full font-medium transition-colors ${
+          className={`w-full py-4 rounded-full font-semibold transition-colors text-[15px] ${
             hasSelection 
-              ? "bg-slate-800 text-white hover:bg-slate-700" 
+              ? "bg-[#E6E1DC] hover:bg-[#D5D0CB] text-slate-800" // Look at image: Active button is beige, text dark
               : "bg-[#E6E1DC] text-slate-400 cursor-not-allowed"
           }`}
         >

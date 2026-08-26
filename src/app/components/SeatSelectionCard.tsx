@@ -49,7 +49,7 @@ export default function SeatSelectionCard() {
       <MobileHeader selectedCount={selectedSeats.length} />
 
       {/* Desktop Left Column (Hidden on < lg) */}
-      <DesktopLeftColumn />
+      <DesktopLeftColumn selectedSeats={selectedSeats} totalPrice={totalPrice} />
 
       {/* Center Column: Seat Map (Scrollable) */}
       <div className="flex-1 lg:border-x border-slate-100 flex flex-col overflow-hidden">
