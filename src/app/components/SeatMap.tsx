@@ -55,10 +55,13 @@ export default function SeatMap({ selectedSeats, onSeatClick }: SeatMapProps) {
             onSeatClick={onSeatClick} 
           />
           
-          <div className="flex flex-col items-center w-full">
-            <h3 className="text-sm font-bold text-slate-800 mb-6">Economy Class</h3>
-            {/* Omitted economy seats as per screenshot cutoff */}
-          </div>
+          <CabinSection 
+            title="Economy Class" 
+            rows={[9, 10, 11, 12, 13]} 
+            layout="economy" 
+            selectedSeats={selectedSeats} 
+            onSeatClick={onSeatClick} 
+          />
         </div>
       </div>
     </div>

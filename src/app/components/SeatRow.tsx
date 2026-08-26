@@ -11,7 +11,7 @@ interface SeatData {
 
 interface SeatRowProps {
   rowNum: number;
-  layout: "business" | "first"; // business: A B (gap) 1 (gap) C D, first: A B C (gap) 1 (gap) D E
+  layout: "business" | "first" | "economy"; // business: A B (gap) 1 (gap) C D, first/economy: A B C (gap) 1 (gap) D E
   prefix?: string;
   seats: Record<string, SeatState>; // map col -> state
   onSeatClick: (id: string, state: SeatState) => void;
@@ -30,7 +30,7 @@ export default function SeatRow({ rowNum, layout, prefix = "", seats, onSeatClic
       <div className="flex gap-2">
         {renderSeat("A")}
         {renderSeat("B")}
-        {layout === "first" && renderSeat("C")}
+        {(layout === "first" || layout === "economy") && renderSeat("C")}
       </div>
       
       {/* Center Number */}
@@ -42,7 +42,7 @@ export default function SeatRow({ rowNum, layout, prefix = "", seats, onSeatClic
       <div className="flex gap-2">
         {layout === "business" && renderSeat("C")}
         {renderSeat("D")}
-        {layout === "first" && renderSeat("E")}
+        {(layout === "first" || layout === "economy") && renderSeat("E")}
       </div>
     </div>
   );

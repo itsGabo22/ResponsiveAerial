@@ -25,5 +25,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.custom-scrollbar::-webkit-scrollbar { display: none; }
-.custom-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.custom-scrollbar::-webkit-scrollbar { width: 6px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background-color: #fb923c; border-radius: 10px; }
+.custom-scrollbar { scrollbar-width: thin; scrollbar-color: #fb923c transparent; }

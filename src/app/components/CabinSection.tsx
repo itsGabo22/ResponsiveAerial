@@ -7,7 +7,7 @@ import { SeatState } from "./SeatSelectionCard";
 interface CabinSectionProps {
   title: string;
   rows: number[];
-  layout: "business" | "first";
+  layout: "business" | "first" | "economy";
   selectedSeats: string[];
   onSeatClick: (id: string, state: SeatState) => void;
 }
@@ -22,7 +22,8 @@ export default function CabinSection({ title, rows, layout, selectedSeats, onSea
     // Hardcode some seats as taken to match the visual variety in the mockup
     const takenSeats = [
       "business-1C", "business-1D", "business-2A", "business-2C", "business-2D", "business-3B", "business-4A", "business-4B",
-      "first-1A", "first-2C", "first-3A", "first-4B", "first-5D", "first-5E", "first-6D"
+      "first-1A", "first-2C", "first-3A", "first-4B", "first-5D", "first-5E", "first-6D",
+      "economy-1C", "economy-2A", "economy-2E", "economy-3B", "economy-4D"
     ];
     if (takenSeats.includes(id)) return "taken";
     

@@ -15,9 +15,9 @@ export default function MobileStickyFooter({ totalPrice, hasSelection }: MobileS
         <span className="text-[28px] leading-none font-bold text-slate-800">${totalPrice}</span>
       </div>
       <button 
-        className={`flex-1 ml-6 py-4 rounded-full font-semibold transition-colors text-[15px] ${
+        className={`flex-1 ml-4 py-[18px] rounded-full font-bold transition-colors text-[16px] ${
           hasSelection 
-            ? "bg-slate-800 text-white hover:bg-slate-700" 
+            ? "bg-[#1f2937] text-white hover:bg-slate-700" 
             : "bg-[#E6E1DC] text-slate-400 cursor-not-allowed"
         }`}
       >
