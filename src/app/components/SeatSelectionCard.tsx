@@ -43,7 +43,7 @@ export default function SeatSelectionCard() {
   const totalPrice = selectedSeats.length * 150; // $150 per seat
 
   return (
-    <div className="relative w-full max-w-[1200px] h-[850px] max-h-[90vh] bg-white lg:rounded-[32px] rounded-3xl shadow-2xl overflow-hidden flex flex-col lg:grid lg:grid-cols-[280px_1fr_280px]">
+    <div className="w-full h-screen bg-white flex flex-col lg:grid lg:grid-cols-[320px_1fr_320px]">
       
       {/* Mobile Header (Hidden on lg) */}
       <MobileHeader selectedCount={selectedSeats.length} />

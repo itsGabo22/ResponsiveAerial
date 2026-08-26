@@ -11,13 +11,13 @@ interface SeatProps {
 }
 
 export default function Seat({ id, state, onClick, label }: SeatProps) {
-  const baseStyles = "w-9 h-11 rounded-lg flex items-center justify-center text-xs font-semibold transition-all cursor-pointer";
+  const baseStyles = "w-11 h-11 rounded-xl flex items-center justify-center text-[13px] font-semibold transition-all cursor-pointer";
   
   let stateStyles = "";
   if (state === "available") {
-    stateStyles = "bg-white border-2 border-orange-200 text-orange-400 hover:border-orange-400";
+    stateStyles = "bg-white border border-orange-300 text-orange-400 hover:border-orange-400";
   } else if (state === "selected") {
-    stateStyles = "bg-orange-500 border-2 border-orange-500 text-white shadow-md shadow-orange-500/30";
+    stateStyles = "bg-orange-500 border border-orange-500 text-white shadow-md shadow-orange-500/30";
   } else if (state === "taken") {
     stateStyles = "bg-slate-100 text-slate-300 cursor-not-allowed";
   }

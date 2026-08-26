@@ -11,7 +11,7 @@ export default function DesktopRightColumn({ selectedSeats, totalPrice }: Deskto
   const hasSelection = selectedSeats.length > 0;
   
   return (
-    <div className="hidden lg:flex flex-col p-8 shrink-0 w-[280px]">
+    <div className="hidden lg:flex flex-col p-8 lg:p-12 shrink-0">
       <h2 className="text-lg font-bold text-slate-800 mb-6">Your selection</h2>
       
       <div className="border border-dashed border-orange-200 rounded-2xl p-6 flex flex-col items-center justify-center text-center text-sm text-slate-400 mb-auto">
