@@ -1,9 +1,9 @@
 "use client";
 
-import React from "react";
+import React, { useContext } from "react";
 import SeatLegend from "./SeatLegend";
 import CabinSection from "./CabinSection";
-import { SeatState } from "./SeatSelectionCard";
+import { SeatState, LanguageContext } from "./SeatSelectionCard";
 
 interface SeatMapProps {
   selectedSeats: string[];
@@ -11,16 +11,11 @@ interface SeatMapProps {
 }
 
 export default function SeatMap({ selectedSeats, onSeatClick }: SeatMapProps) {
-  // Desktop header shows "0/2" with progress bar at top of SeatMap (in mobile, it's inside MobileHeader, but actually looking at the screenshots... 
-  // Desktop has "0/2" progress bar above the legend in the center column.
-  // Mobile also has "0/2" at the very top of the screen (above the blue pill), but let's just keep the progress bar part of the SeatMap since it scrolls with it or stays on top.
-  // Actually, I'll put it at the top of the SeatMap container so it's always visible in the center column for desktop.
-
+  const { t } = useContext(LanguageContext);
   return (
     <div className="flex flex-col w-full h-full relative min-h-0">
       
-      {/* Top Header / Progress Bar (Desktop only, or shared depending on design) */}
-      {/* In mobile, there's a back button and 0/2. Since MobileHeader handles mobile, we hide this on mobile */}
+      {/* Top Header / Progress Bar */}
       <div className="hidden lg:flex flex-col items-center justify-center py-6 shrink-0">
         <span className="text-xs font-semibold text-slate-500 mb-2">{selectedSeats.length}/2</span>
         <div className="w-48 h-1 bg-slate-100 rounded-full overflow-hidden">
@@ -38,7 +33,7 @@ export default function SeatMap({ selectedSeats, onSeatClick }: SeatMapProps) {
         {/* Subtle curved background to mimic airplane cabin. */}
         <div className="w-full max-w-[400px] mx-auto bg-[#F8F9FA] rounded-t-[200px] rounded-b-[60px] p-6 pt-16 relative overflow-hidden">
           <CabinSection 
-            title="Business Class" 
+            title={t.businessClass} 
             rows={[1, 2, 3, 4]} 
             layout="business" 
             selectedSeats={selectedSeats} 
@@ -46,17 +41,15 @@ export default function SeatMap({ selectedSeats, onSeatClick }: SeatMapProps) {
           />
           
           <CabinSection 
-            title="First Class" 
-            rows={[5, 6, 7, 8]} // Using 5-8 so IDs are unique. Actually, the mockup shows 1,2,3,4,5,6 for First Class. 
-            // We'll use 1-6 but prefix with 'F' under the hood if needed, but for the UI clone, 
-            // the screenshot literally says 1 2 3 4 5 6 again. 
+            title={t.firstClass} 
+            rows={[5, 6, 7, 8]} 
             layout="first" 
             selectedSeats={selectedSeats} 
             onSeatClick={onSeatClick} 
           />
           
           <CabinSection 
-            title="Economy Class" 
+            title={t.economyClass} 
             rows={[9, 10, 11, 12, 13]} 
             layout="economy" 
             selectedSeats={selectedSeats} 

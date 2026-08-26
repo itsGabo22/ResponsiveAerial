@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { motion } from "framer-motion";
+import { LanguageContext } from "./SeatSelectionCard";
 
 interface DesktopLeftColumnProps {
   selectedSeats?: string[];
@@ -9,6 +10,8 @@ interface DesktopLeftColumnProps {
 }
 
 export default function DesktopLeftColumn({ selectedSeats = [], totalPrice = 0 }: DesktopLeftColumnProps) {
+  const { t } = useContext(LanguageContext);
+  
   const formatSeat = (id: string) => {
     if (!id) return "—";
     const parts = id.split('-');
@@ -19,11 +22,11 @@ export default function DesktopLeftColumn({ selectedSeats = [], totalPrice = 0 }
   const seat2 = formatSeat(selectedSeats[1]);
 
   const getClassName = () => {
-    if (selectedSeats.length === 0) return "Business Class"; // default if none selected
+    if (selectedSeats.length === 0) return t.businessClass;
     const firstSeat = selectedSeats[0];
-    if (firstSeat.startsWith("first")) return "First Class";
-    if (firstSeat.startsWith("business")) return "Business Class";
-    return "Economy Class";
+    if (firstSeat.startsWith("first")) return t.firstClass;
+    if (firstSeat.startsWith("business")) return t.businessClass;
+    return t.economyClass;
   };
   const displayClass = getClassName();
 
@@ -35,7 +38,7 @@ export default function DesktopLeftColumn({ selectedSeats = [], totalPrice = 0 }
             <path d="M15 18l-6-6 6-6" />
           </svg>
         </button>
-        <span className="text-sm font-medium">Flight details</span>
+        <span className="text-sm font-medium">{t.flightDetails}</span>
       </div>
 
       {/* Selected Seat Info Box */}
@@ -51,17 +54,17 @@ export default function DesktopLeftColumn({ selectedSeats = [], totalPrice = 0 }
         
         <div className="flex gap-8 mb-6 text-slate-800 font-bold">
           <div className="flex flex-col gap-1">
-            <span className="text-[11px] text-slate-400 font-medium">Seat</span>
+            <span className="text-[11px] text-slate-400 font-medium">{t.seat}</span>
             <span className="text-sm">{seat1}</span>
           </div>
           <div className="flex flex-col gap-1">
-            <span className="text-[11px] text-slate-400 font-medium">Seat</span>
+            <span className="text-[11px] text-slate-400 font-medium">{t.seat}</span>
             <span className="text-sm">{seat2}</span>
           </div>
         </div>
 
         <div className="text-[13px] font-semibold">
-          <span className="text-slate-400">Price: </span>
+          <span className="text-slate-400">{t.price}: </span>
           <span className="text-orange-500">${totalPrice}</span>
         </div>
       </div>
@@ -126,11 +129,11 @@ export default function DesktopLeftColumn({ selectedSeats = [], totalPrice = 0 }
       {/* Date and Flight No */}
       <div className="flex gap-4 mt-auto">
         <div className="flex-1 bg-slate-50 rounded-2xl p-4 flex flex-col gap-1">
-          <span className="text-[10px] uppercase font-bold text-slate-400">Date</span>
+          <span className="text-[10px] uppercase font-bold text-slate-400">{t.date}</span>
           <span className="text-xs font-bold text-slate-800">Dec 1, 2026</span>
         </div>
         <div className="flex-1 bg-slate-50 rounded-2xl p-4 flex flex-col gap-1">
-          <span className="text-[10px] uppercase font-bold text-slate-400">Flight</span>
+          <span className="text-[10px] uppercase font-bold text-slate-400">{t.flight}</span>
           <span className="text-xs font-bold text-slate-800">No 25</span>
         </div>
       </div>

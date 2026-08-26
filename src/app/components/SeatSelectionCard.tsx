@@ -18,6 +18,55 @@ export interface SeatData {
   price: number;
 }
 
+export const translations = {
+  en: {
+    flightDetails: "Flight details",
+    businessClass: "Business Class",
+    firstClass: "First Class",
+    economyClass: "Economy Class",
+    seat: "Seat",
+    price: "Price",
+    date: "Date",
+    flight: "Flight",
+    yourSelection: "Your selection",
+    selected: "Selected",
+    pickUpTo: "Pick up to 2 seats\nfrom the cabin map",
+    seats: "Seats",
+    taxes: "Taxes & fees",
+    none: "None",
+    total: "Total",
+    selectSeat: "Select a seat",
+    available: "Available",
+    taken: "Taken",
+  },
+  es: {
+    flightDetails: "Detalles del vuelo",
+    businessClass: "Clase Ejecutiva",
+    firstClass: "Primera Clase",
+    economyClass: "Clase Económica",
+    seat: "Asiento",
+    price: "Precio",
+    date: "Fecha",
+    flight: "Vuelo",
+    yourSelection: "Tu selección",
+    selected: "Seleccionado",
+    pickUpTo: "Elige hasta 2 asientos\ndel mapa de cabina",
+    seats: "Asientos",
+    taxes: "Impuestos y cargos",
+    none: "Ninguno",
+    total: "Total",
+    selectSeat: "Elegir asiento",
+    available: "Disponible",
+    taken: "Ocupado",
+  }
+};
+
+export type Lang = "en" | "es";
+export const LanguageContext = React.createContext<{ lang: Lang, t: typeof translations.en }>({
+  lang: "en",
+  t: translations.en
+});
+
 export default function SeatSelectionCard() {
   const [selectedSeats, setSelectedSeats] = useState<string[]>([]);
 
@@ -46,26 +95,41 @@ export default function SeatSelectionCard() {
     return acc + 100; // economy
   }, 0);
 
+  const [lang, setLang] = useState<Lang>("en");
+  const t = translations[lang];
+
+  const toggleLang = () => setLang(l => l === "en" ? "es" : "en");
+
   return (
-    <div className="w-full h-[100dvh] bg-white flex flex-col lg:grid lg:grid-cols-[320px_1fr_320px]">
-      
-      {/* Mobile Header (Hidden on lg) */}
-      <MobileHeader selectedCount={selectedSeats.length} />
+    <LanguageContext.Provider value={{ lang, t }}>
+      <div className="w-full h-[100dvh] bg-white flex flex-col lg:grid lg:grid-cols-[320px_1fr_320px] relative">
+        
+        {/* Language Toggle Button */}
+        <button 
+          onClick={toggleLang}
+          className="absolute z-50 top-4 right-4 lg:bottom-4 lg:top-auto lg:left-4 lg:right-auto bg-orange-500 text-white font-bold text-xs px-3 py-1.5 rounded-full shadow-lg hover:bg-orange-600 transition-colors"
+        >
+          {lang === "en" ? "ESPAÑOL" : "ENGLISH"}
+        </button>
 
-      {/* Desktop Left Column (Hidden on < lg) */}
-      <DesktopLeftColumn selectedSeats={selectedSeats} totalPrice={totalPrice} />
+        {/* Mobile Header (Hidden on lg) */}
+        <MobileHeader selectedCount={selectedSeats.length} />
 
-      {/* Center Column: Seat Map (Scrollable) */}
-      <div className="flex-1 lg:border-x border-slate-100 flex flex-col overflow-hidden">
-        <SeatMap selectedSeats={selectedSeats} onSeatClick={handleSeatClick} />
+        {/* Desktop Left Column (Hidden on < lg) */}
+        <DesktopLeftColumn selectedSeats={selectedSeats} totalPrice={totalPrice} />
+
+        {/* Center Column: Seat Map (Scrollable) */}
+        <div className="flex-1 lg:border-x border-slate-100 flex flex-col overflow-hidden">
+          <SeatMap selectedSeats={selectedSeats} onSeatClick={handleSeatClick} />
+        </div>
+
+        {/* Desktop Right Column (Hidden on < lg) */}
+        <DesktopRightColumn selectedSeats={selectedSeats} totalPrice={totalPrice} />
+
+        {/* Mobile Sticky Footer (Hidden on lg) */}
+        <MobileStickyFooter totalPrice={totalPrice} hasSelection={selectedSeats.length > 0} />
+        
       </div>
-
-      {/* Desktop Right Column (Hidden on < lg) */}
-      <DesktopRightColumn selectedSeats={selectedSeats} totalPrice={totalPrice} />
-
-      {/* Mobile Sticky Footer (Hidden on lg) */}
-      <MobileStickyFooter totalPrice={totalPrice} hasSelection={selectedSeats.length > 0} />
-      
-    </div>
+    </LanguageContext.Provider>
   );
 }
