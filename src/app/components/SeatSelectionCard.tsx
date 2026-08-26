@@ -47,7 +47,7 @@ export default function SeatSelectionCard() {
   }, 0);
 
   return (
-    <div className="w-full h-screen bg-white flex flex-col lg:grid lg:grid-cols-[320px_1fr_320px]">
+    <div className="w-full h-[100dvh] bg-white flex flex-col lg:grid lg:grid-cols-[320px_1fr_320px]">
       
       {/* Mobile Header (Hidden on lg) */}
       <MobileHeader selectedCount={selectedSeats.length} />
